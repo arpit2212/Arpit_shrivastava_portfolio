@@ -14,14 +14,14 @@ const Hero = () => {
     "Software Engineer",
     "Ui Ux Designer",
     "Intern @ Deccan AI",
-    "Vice President @ Alexa Club",
-    "Freelance Developer"
+    "Vice President @ Alexa Club"
+   
   ];
 
   useEffect(() => {
     const roleTimer = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 4000);
+    }, 6000);
     return () => clearInterval(roleTimer);
   }, []);
 
