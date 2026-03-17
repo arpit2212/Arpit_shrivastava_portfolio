@@ -105,17 +105,30 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-7xl md:text-9xl font-bold tracking-tighter leading-none text-white drop-shadow-2xl flex flex-wrap justify-center"
+            className="text-6xl md:text-9xl font-bold tracking-tighter leading-none text-white drop-shadow-2xl flex flex-wrap justify-center gap-x-[0.3em]"
           >
-            {"Arpit Shrivastava".split("").map((char, i) => (
-              <motion.span
-                key={i}
-                whileHover={{ color: "#60a5fa" }}
-                className="cursor-default transition-colors duration-200"
-              >
-                {char === " " ? "\u00A0" : char}
-              </motion.span>
-            ))}
+            <div className="flex flex-wrap justify-center">
+              {"Arpit".split("").map((char, i) => (
+                <motion.span
+                  key={`arpit-${i}`}
+                  whileHover={{ color: "#60a5fa" }}
+                  className="cursor-default transition-colors duration-200"
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </div>
+            <div className="flex flex-wrap justify-center">
+              {"Shrivastava".split("").map((char, i) => (
+                <motion.span
+                  key={`shrivastava-${i}`}
+                  whileHover={{ color: "#60a5fa" }}
+                  className="cursor-default transition-colors duration-200"
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </div>
           </motion.h1>
           <div className="h-12 flex items-center justify-center">
             <p className="text-xl md:text-3xl text-gray-400 font-medium leading-relaxed font-mono min-h-[1.5em]">
