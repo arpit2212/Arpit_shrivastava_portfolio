@@ -12,16 +12,16 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] sm:w-auto">
-      <nav className="flex items-center justify-center gap-1 px-2 sm:px-3 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl overflow-x-auto no-scrollbar">
+    <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95%]">
+      <nav className="flex items-center justify-center gap-0.5 sm:gap-1 px-1.5 sm:px-3 py-1.5 sm:py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl overflow-x-auto no-scrollbar">
         {navItems.map((item, index) => (
           <a
             key={index}
             href={item.href}
-            className="flex items-center gap-0 sm:hover:gap-2 px-2 sm:px-3 py-2 rounded-full text-gray-400 sm:hover:text-white sm:hover:bg-white/10 transition-all duration-500 ease-in-out group overflow-hidden whitespace-nowrap"
+            className="flex items-center gap-0 sm:hover:gap-2 px-2.5 sm:px-3 py-2 rounded-full text-gray-400 sm:hover:text-white sm:hover:bg-white/10 transition-all duration-500 ease-in-out group overflow-hidden whitespace-nowrap"
           >
             <span className="flex-shrink-0 transition-transform duration-500">
-              {item.icon}
+              {React.cloneElement(item.icon, { size: window.innerWidth < 640 ? 16 : 18 })}
             </span>
             <span className="max-w-0 opacity-0 sm:group-hover:max-w-[120px] sm:group-hover:opacity-100 transition-all duration-500 ease-in-out text-sm font-medium tracking-wide">
               {item.label}
