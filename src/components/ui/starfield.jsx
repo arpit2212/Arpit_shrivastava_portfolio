@@ -137,7 +137,7 @@ export function StarfieldBackground({
   return (
     <div
       ref={containerRef}
-      className={cn("fixed inset-0 overflow-hidden bg-[#0a0a0f]", className)}>
+      className={cn("absolute inset-0 overflow-hidden bg-[#0a0a0f]", className)}>
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
       {/* Subtle blue nebula glow */}
       <div
