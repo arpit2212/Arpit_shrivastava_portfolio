@@ -42,12 +42,12 @@ const Navbar = () => {
       animate={{ 
         y: isVisible ? 0 : -75,
         x: '-50%', 
-        opacity: isVisible ? 1 : 0.2
+        opacity: isVisible ? 1 : 0.8 // Increase opacity when hidden for better visibility
       }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="fixed top-7 left-1/2 z-50 w-auto"
     >
-      <nav className="flex items-center justify-center gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3.5 rounded-[40px] bg-white/[0.03] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] overflow-hidden">
+      <nav className={`flex items-center justify-center gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3.5 rounded-[40px] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] overflow-hidden transition-colors duration-500 ${isVisible ? 'bg-white/[0.03]' : 'bg-white/10'}`}>
         {navItems.map((item, index) => (
           <a
             key={index}

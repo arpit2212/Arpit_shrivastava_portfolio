@@ -101,16 +101,24 @@ const About = () => {
           className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center"
         >
           <div 
-            className="perspective-[1500px] w-full order-2 md:order-1"
+            className="perspective-[1500px] w-full order-2 md:order-1 relative group"
             onMouseEnter={() => !isMobile && setIsFlipped(true)}
             onMouseLeave={() => !isMobile && setIsFlipped(false)}
-            onClick={() => isMobile && setIsFlipped(!isFlipped)}
           >
             <motion.div
               animate={{ rotateY: isFlipped ? 180 : 0 }}
+              drag={isMobile ? "x" : false}
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(_, info) => {
+                if (isMobile) {
+                  if (info.offset.x > 50) setIsFlipped(false);
+                  else if (info.offset.x < -50) setIsFlipped(true);
+                }
+              }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               style={{ transformStyle: "preserve-3d" }}
               className="relative w-full min-h-[400px] md:min-h-[450px] cursor-pointer"
+              onClick={() => isMobile && setIsFlipped(!isFlipped)}
             >
               {/* Front Side: About Me Content */}
               <div 
@@ -121,18 +129,13 @@ const About = () => {
                   About Me
                 </h2>
                 <div className="space-y-4">
-                  <p className="text-base md:text-lg text-gray-400 leading-relaxed text-center md:text-left">
+                  <p className="text-base md:text-lg text-gray-400 leading-relaxed text-justify">
                     I am a dedicated Full Stack Developer with a passion for creating high-performance web applications. My journey in tech is driven by a curiosity to solve complex problems and a commitment to delivering exceptional user experiences.
                   </p>
-                  <p className="text-base md:text-lg text-gray-400 leading-relaxed text-center md:text-left">
+                  <p className="text-base md:text-lg text-gray-400 leading-relaxed text-justify">
                     With expertise in modern technologies like React, Node.js, and cloud architecture, I bridge the gap between robust backend systems and intuitive frontend interfaces.
                   </p>
                 </div>
-                {isMobile && (
-                  <p className="text-xs text-blue-400/60 text-center mt-4 animate-pulse">
-                    Tap to see education & resume
-                  </p>
-                )}
               </div>
 
               {/* Back Side: Education & Resume */}
@@ -212,6 +215,22 @@ const About = () => {
                 </div>
               </div>
             </motion.div>
+
+            {/* Mobile-only Dot Indicators */}
+            {isMobile && (
+              <div className="flex justify-center gap-3 mt-6">
+                <button 
+                  onClick={() => setIsFlipped(false)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${!isFlipped ? 'bg-white scale-110' : 'bg-white/20'}`}
+                  aria-label="View About Me"
+                />
+                <button 
+                  onClick={() => setIsFlipped(true)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${isFlipped ? 'bg-white scale-110' : 'bg-white/20'}`}
+                  aria-label="View Education"
+                />
+              </div>
+            )}
           </div>
 
           <motion.div 
