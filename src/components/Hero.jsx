@@ -70,7 +70,7 @@ const Hero = () => {
   ];
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden text-center px-4 bg-transparent pt-20 sm:pt-0">
+    <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden text-center px-4 bg-transparent pt-12 sm:pt-0">
       {/* Background Gradients removed in favor of StarfieldBackground in Home.jsx */}
       <div className="absolute inset-0 z-0">
       </div>

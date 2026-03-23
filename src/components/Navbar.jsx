@@ -27,13 +27,24 @@ const Navbar = () => {
     };
   }, [lastScrollY]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const navItems = [
-    { icon: <Home size={21} />, label: 'Home', href: '#' },
-    { icon: <User size={21} />, label: 'About Me', href: '#about' },
-    { icon: <Trophy size={21} />, label: 'Technical Skills', href: '#skills' },
-    { icon: <Briefcase size={21} />, label: 'Experience', href: '#experience' },
-    { icon: <Code size={21} />, label: 'Projects', href: '#projects' },
-    { icon: <Mail size={21} />, label: 'Contact Me', href: '#contact' },
+    { icon: <Home size={isMobile ? 18 : 21} />, label: 'Home', href: '#' },
+    { icon: <User size={isMobile ? 18 : 21} />, label: 'About Me', href: '#about' },
+    { icon: <Trophy size={isMobile ? 18 : 21} />, label: 'Technical Skills', href: '#skills' },
+    { icon: <Briefcase size={isMobile ? 18 : 21} />, label: 'Experience', href: '#experience' },
+    { icon: <Code size={isMobile ? 18 : 21} />, label: 'Projects', href: '#projects' },
+    { icon: <Mail size={isMobile ? 18 : 21} />, label: 'Contact Me', href: '#contact' },
   ];
 
   return (
@@ -45,16 +56,16 @@ const Navbar = () => {
         opacity: isVisible ? 1 : 0.8 // Increase opacity when hidden for better visibility
       }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed top-7 left-1/2 z-50 w-auto"
+      className="fixed top-7 left-1/2 z-50 w-[80%] sm:w-auto max-w-[400px] sm:max-w-none"
     >
-      <nav className={`flex items-center justify-center gap-2 sm:gap-4 px-4 sm:px-6 py-3 sm:py-3.5 rounded-[40px] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] overflow-hidden transition-colors duration-500 ${isVisible ? 'bg-white/[0.03]' : 'bg-white/10'}`}>
+      <nav className={`flex items-center justify-center gap-1 sm:gap-4 px-2 sm:px-6 py-2 sm:py-3.5 rounded-[40px] backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.8)] overflow-hidden transition-colors duration-500 ${isVisible ? 'bg-white/[0.03]' : 'bg-white/10'}`}>
         {navItems.map((item, index) => (
           <a
             key={index}
             href={item.href}
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
-            className="group relative flex items-center gap-0 text-gray-400 hover:text-white transition-all duration-500 ease-in-out px-3 py-2 rounded-full hover:bg-white/10"
+            className="group relative flex items-center gap-0 text-gray-400 hover:text-white transition-all duration-500 ease-in-out px-2 sm:px-3 py-1.5 sm:py-2 rounded-full hover:bg-white/10"
             aria-label={item.label}
           >
             <motion.div
