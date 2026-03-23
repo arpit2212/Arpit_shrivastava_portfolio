@@ -13,25 +13,28 @@ const Home = () => {
       <Navbar />
       
       <main className="relative">
-        {/* Hero Section with its own Starfield Background */}
+        {/* Hero Section */}
         <section className="relative h-screen overflow-hidden">
           <StarfieldBackground 
             count={500}
             speed={0.4}
             className="z-0"
           />
+          {/* Seamless transition gradient to the next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10 pointer-events-none" />
           <Hero />
         </section>
 
         {/* Other Sections with Shared Animated Gradient Background */}
         <section className="relative">
+          {/* Seamless transition gradient from the hero section */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black to-transparent z-10 pointer-events-none" />
+          
           <AnimatedBackground />
           <div className="relative z-10">
             <About />
             <Skills />
             <Projects />
-            
-            {/* Additional sections like Blogs, Contact can go here */}
           </div>
         </section>
       </main>

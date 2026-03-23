@@ -21,7 +21,7 @@ const Hero = () => {
   useEffect(() => {
     const roleTimer = setInterval(() => {
       setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 6000);
+    }, 2000);
     return () => clearInterval(roleTimer);
   }, []);
 

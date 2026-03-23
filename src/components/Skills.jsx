@@ -2,13 +2,35 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Code2, Cpu, Layers } from 'lucide-react';
 
-const SkillCard = ({ title, icon, skills, variants }) => {
-  const chipHoverStyle = { 
-    backgroundColor: "rgba(255, 255, 255, 0.15)", 
-    color: "#ffffff", 
-    borderColor: "rgba(255, 255, 255, 0.3)",
-    boxShadow: "0 0 20px rgba(255, 255, 255, 0.1)"
-  };
+const SkillCard = ({ title, icon, skills, variants, categoryIndex }) => {
+  const categoryColors = [
+    {
+      bg: "bg-blue-500/10",
+      text: "text-blue-400",
+      border: "border-blue-500/20",
+      hoverBg: "bg-blue-500/20",
+      hoverBorder: "border-blue-500/40",
+      glowColor: "rgba(59, 130, 246, 0.5)"
+    },
+    {
+      bg: "bg-purple-500/10",
+      text: "text-purple-400",
+      border: "border-purple-500/20",
+      hoverBg: "bg-purple-500/20",
+      hoverBorder: "border-purple-500/40",
+      glowColor: "rgba(168, 85, 247, 0.5)"
+    },
+    {
+      bg: "bg-emerald-500/10",
+      text: "text-emerald-400",
+      border: "border-emerald-500/20",
+      hoverBg: "bg-emerald-500/20",
+      hoverBorder: "border-emerald-500/40",
+      glowColor: "rgba(16, 185, 129, 0.5)"
+    }
+  ];
+
+  const color = categoryColors[categoryIndex] || categoryColors[0];
 
   return (
     <motion.div
@@ -24,7 +46,7 @@ const SkillCard = ({ title, icon, skills, variants }) => {
       
       <div className="relative z-10">
         <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-7">
-          <div className="p-2 sm:p-2.5 rounded-xl transition-all duration-500 group-hover:scale-110 bg-white/5 text-gray-300 border border-white/10 group-hover:border-white/20 group-hover:text-white">
+          <div className={`p-2 sm:p-2.5 rounded-xl transition-all duration-500 group-hover:scale-110 ${color.bg} ${color.text} border ${color.border} group-hover:border-white/20`}>
             {React.cloneElement(icon, { size: 18, className: "sm:w-5 sm:h-5" })}
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight">
@@ -42,12 +64,13 @@ const SkillCard = ({ title, icon, skills, variants }) => {
               transition={{ delay: i * 0.02 }}
               whileHover={{ 
                 scale: 1.1,
-                y: -2,
-                ...chipHoverStyle,
-                backdropFilter: "blur(15px)",
+                y: -3,
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                boxShadow: `0 0 20px ${color.glowColor}`,
+                borderColor: color.glowColor,
                 transition: { type: "spring", stiffness: 400, damping: 10 }
               }}
-              className="px-2.5 py-1 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-[13px] font-medium border border-white/5 bg-white/5 text-gray-400 transition-all duration-300 cursor-default relative overflow-hidden"
+              className={`px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-medium border ${color.border} ${color.bg} ${color.text} transition-all duration-300 cursor-default relative overflow-hidden`}
             >
               {skill}
             </motion.span>
@@ -97,10 +120,10 @@ const Skills = () => {
   };
 
   return (
-    <section id="skills" className="py-16 sm:py-24 relative bg-gradient-to-br from-black via-gray-950 to-black overflow-hidden">
-      {/* Nebula atmospheric effects */}
-      <div className="absolute top-1/4 -left-24 w-96 h-96 bg-gray-800/20 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-24 w-96 h-96 bg-gray-700/15 blur-[120px] rounded-full pointer-events-none" />
+    <section id="skills" className="py-16 sm:py-24 relative bg-transparent overflow-hidden">
+      {/* Nebula atmospheric effects - subtly blended */}
+      <div className="absolute top-1/4 -right-24 w-72 h-72 md:w-96 md:h-96 bg-blue-500/5 blur-[100px] md:blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-24 w-72 h-72 md:w-96 md:h-96 bg-purple-500/5 blur-[100px] md:blur-[120px] rounded-full pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -112,7 +135,7 @@ const Skills = () => {
           className="text-center mb-12 sm:mb-16 space-y-3 sm:space-y-4"
         >
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold tracking-tight text-white">
-            Technical <span className="text-gray-400">Skills</span>
+            Technical <span className="text-blue-400">Skills</span>
           </h2>
           <p className="text-sm sm:text-lg text-gray-500 max-w-3xl mx-auto font-medium px-4">
             A comprehensive overview of my technical expertise spanning multiple domains including AI/ML, software development, and various programming languages.
@@ -128,13 +151,13 @@ const Skills = () => {
         >
           {/* Left Column: Languages & AI/ML */}
           <div className="space-y-6 sm:space-y-8">
-            <SkillCard {...skillCategories[0]} variants={cardVariants} />
-            <SkillCard {...skillCategories[2]} variants={cardVariants} />
+            <SkillCard {...skillCategories[0]} variants={cardVariants} categoryIndex={0} />
+            <SkillCard {...skillCategories[2]} variants={cardVariants} categoryIndex={2} />
           </div>
 
           {/* Right Column: Software Development */}
           <div>
-            <SkillCard {...skillCategories[1]} variants={cardVariants} />
+            <SkillCard {...skillCategories[1]} variants={cardVariants} categoryIndex={1} />
           </div>
         </motion.div>
       </div>
