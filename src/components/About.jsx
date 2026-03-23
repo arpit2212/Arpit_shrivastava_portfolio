@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useSpring, useMotionValue, useTransform, AnimatePresence } from 'framer-motion';
-import { Linkedin, FileText, Smartphone } from 'lucide-react';
+import { motion, useSpring, useMotionValue, useTransform } from 'framer-motion';
+import { Linkedin, FileText } from 'lucide-react';
 import profileImage from '../assets/Arpit_Shrivastava.jpg';
 
 const About = () => {
@@ -25,7 +25,6 @@ const About = () => {
   const fgTranslateY = useTransform(smoothY, [0, 1], [-20, 20]);
 
   const [isMobile, setIsMobile] = useState(false);
-  const [gyroPermission, setGyroPermission] = useState('unknown');
 
   useEffect(() => {
     // Detect mobile device
@@ -35,8 +34,6 @@ const About = () => {
     checkMobile();
 
     const handleMouseMove = (e) => {
-      if (isMobile && gyroPermission === 'granted') return; // Prefer gyro on mobile if granted
-      
       const x = e.clientX / window.innerWidth;
       const y = e.clientY / window.innerHeight;
       mouseX.set(x);
@@ -56,29 +53,18 @@ const About = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    if (isMobile && gyroPermission === 'granted') {
-      window.addEventListener('deviceorientation', handleOrientation);
-    }
+    
+    // Attempt to listen to orientation by default
+    // Note: iOS Safari still requires a user gesture for .requestPermission() 
+    // but many Android browsers and older iOS versions don't.
+    // We'll listen by default and only fall back to mouse/touch if needed.
+    window.addEventListener('deviceorientation', handleOrientation);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('deviceorientation', handleOrientation);
     };
-  }, [mouseX, mouseY, isMobile, gyroPermission]);
-
-  const requestPermission = async () => {
-    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-      try {
-        const permission = await DeviceOrientationEvent.requestPermission();
-        setGyroPermission(permission);
-      } catch (error) {
-        console.error('Gyroscope permission error:', error);
-      }
-    } else {
-      // Browser doesn't support/require explicit permission
-      setGyroPermission('granted');
-    }
-  };
+  }, [mouseX, mouseY, isMobile]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -207,21 +193,7 @@ const About = () => {
               </motion.div>
             </motion.div>
             
-            {/* Mobile Gyro Permission Button */}
-            <AnimatePresence>
-              {isMobile && gyroPermission !== 'granted' && (
-                <motion.button
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  onClick={requestPermission}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20 backdrop-blur-sm transition-all"
-                >
-                  <Smartphone size={16} />
-                  <span>Enable 3D Motion</span>
-                </motion.button>
-              )}
-            </AnimatePresence>
+
 
             {/* Subtle atmospheric glow effect outside the container */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02)_0%,transparent_70%)] pointer-events-none -z-10"></div>
