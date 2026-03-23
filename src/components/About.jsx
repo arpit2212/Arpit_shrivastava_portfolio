@@ -123,7 +123,7 @@ const About = () => {
               {/* Front Side: About Me Content */}
               <div 
                 style={{ backfaceVisibility: "hidden" }}
-                className="absolute inset-0 w-full h-full space-y-4 md:space-y-8 backdrop-blur-lg bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl shadow-black/25 flex flex-col justify-center"
+                className="absolute inset-0 w-full h-full space-y-4 md:space-y-8 backdrop-blur-lg bg-white/5 p-10 md:p-8 rounded-2xl border border-white/10 shadow-2xl shadow-black/25 flex flex-col justify-center"
               >
                 <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white text-center md:text-left">
                   About Me
@@ -144,7 +144,7 @@ const About = () => {
                   backfaceVisibility: "hidden",
                   transform: "rotateY(180deg)"
                 }}
-                className="absolute inset-0 w-full h-full backdrop-blur-lg bg-white/5 p-6 md:p-8 rounded-2xl border border-white/10 shadow-2xl shadow-black/25 flex flex-col justify-between"
+                className="absolute inset-0 w-full h-full backdrop-blur-lg bg-white/5 p-10 md:p-8 rounded-2xl border border-white/10 shadow-2xl shadow-black/25 flex flex-col justify-between"
               >
                 <div className="space-y-6">
                   <h3 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
