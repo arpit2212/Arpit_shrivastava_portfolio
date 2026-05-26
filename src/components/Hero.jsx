@@ -62,11 +62,11 @@ const Hero = () => {
   }, [tagline, isDeleting, index, speed]);
 
   const socialLinks = [
-    { icon: <Linkedin size={20} />, href: "https://linkedin.com/in/arpit-shrivastava", label: "LinkedIn" },
-    { icon: <Github size={20} />, href: "https://github.com/arpit-shrivastava", label: "GitHub" },
+    { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/arpit-shrivastava-1278as/", label: "LinkedIn" },
+    { icon: <Github size={20} />, href: "https://github.com/arpit2212", label: "GitHub" },
     { icon: <Mail size={20} />, href: "mailto:arpit.shrivastava2212@gmail.com", label: "Gmail" },
-    { icon: <MessageSquare size={20} />, href: "https://wa.me/your-number", label: "WhatsApp" },
-    { icon: <FileText size={20} />, href: "/resume.pdf", label: "Resume" },
+    { icon: <MessageSquare size={20} />, href: "https://wa.me/919111456393", label: "WhatsApp" },
+    { icon: <FileText size={20} />, href: "https://drive.google.com/file/d/1LQHY89ujztLpXHJPHr-hC4jAXPS7CDV5/view?usp=sharing", label: "Resume" },
   ];
 
   return (
